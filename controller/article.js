@@ -1,5 +1,17 @@
 const {Article} = require('../model')
 
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+  apiKey: 'sk-NJlkpvyVS6kYlS5eNDi8T3BlbkFJJRAOyyNUJO6JdCUY7TDLcd',
+});
+const openai = new OpenAIApi(configuration);
+
+
+
+
+
+
 
 const addArticle=async (req,res,next)=>{
 
@@ -33,42 +45,26 @@ const addArticle=async (req,res,next)=>{
           return;
         }
       
-        // try {
-        //   const completion = await openai.createCompletion({
-        //     prompt,
-        //     model,
-        //     temperature: 0,
-        //     max_tokens: 100,
-        //     top_p: 1,
-        //     frequency_penalty: 0.0,
-        //     presence_penalty: 0.0,
-        //     'max_tokens':2048
-        //   });
-        //   res.status(200).json({ result: completion.data.choices[0].text });
-        // //   res.status(200).json({ result: prompt });
-        // } catch(error) {
-        //   if (error.response) {
-        //     console.error(error.response.status, error.response.data);
-        //     res.status(error.response.status).json(error.response.data);
-        //   } else {
-        //     console.error(`Error with OpenAI API request: ${error.message}`);
-        //     res.status(500).json({
-        //       error: {
-        //         message: 'An error occurred during your request.',
-        //       }
-        //     });
-        //   }
-        // }
 
 
 
+        const completion = await openai.createCompletion({
+            prompt,
+            model,
+            temperature: 0,
+            max_tokens: 100,
+            top_p: 1,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
+            'max_tokens':2048
+        });
 
         const article=new Article({
             title,
             prompt,
             source,
             content,
-            result,
+            result:completion.data.choices[0].text,
             author
         })
         await article.save()
