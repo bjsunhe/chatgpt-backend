@@ -2,9 +2,13 @@ const {Article} = require('../model')
 
 const { Configuration, OpenAIApi } = require("openai") 
 
+const dotenv = require("dotenv")
+dotenv.config()
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_KEY,
 });
+
+console.log(process.env)
 const openai = new OpenAIApi(configuration);
 
 
