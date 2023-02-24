@@ -1,6 +1,6 @@
 const {Article} = require('../model')
 
-import { Configuration, OpenAIApi } from "openai";
+const { Configuration, OpenAIApi } = require("openai") 
 
 const configuration = new Configuration({
   apiKey: 'sk-NJlkpvyVS6kYlS5eNDi8T3BlbkFJJRAOyyNUJO6JdCUY7TDLcd',
